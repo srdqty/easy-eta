@@ -7,12 +7,12 @@ Docker compose file and scripts I made to experiment with Eta.
 In the root directory of this repo run the following:
 
 ```
-docker-compose build
-
 mkdir PROJECT_NAME
 
 # Sets the working directory of the docker container to your project directory.
 . easy-eta-env.sh PROJECT_NAME
+
+docker-compose build
 
 docker-compose run --rm etlas init
 ```
