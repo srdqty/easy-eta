@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  eta-base:
+    image: eta-practice
+    build:
+      context: .
+      args:
+        ETA_UID: ${ETA_UID}
+        ETA_GID: ${ETA_UID}
+        ETA_BRANCH: 0.0.9b1
+    volumes:
+      - ${ETA_PROJECT_ROOT}:/eta-project-root
+    # Don't use root so the generated files have the correct permissions.
+    user: eta_user
+    working_dir: /eta-project-root
+
+  eta:
+    extends:
+      file: docker-compose.yml
+      service: eta-base
+    entrypoint: /eta-entrypoint.sh
+
+  etlas:
+    extends:
+      file: docker-compose.yml
+      service: eta-base
+    entrypoint: /etlas-entrypoint.sh
